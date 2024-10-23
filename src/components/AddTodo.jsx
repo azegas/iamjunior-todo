@@ -1,23 +1,20 @@
 import './AddTodo.css'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-function AddTodo() {
+function AddTodo({ onAddTodo }) {
+  // eiliskumas 3 - deklaruojam input value state?
   const [inputValue, setInputValue] = useState(''); // State for input value
-  const [todos, setTodo] = useState([]); // State for todo list
 
-  // after updating the todo list, I don't see the newest todo item in the list
-  // useEffect hook helps with that - listens for changes to the todo state.
-  useEffect(() => {
-    console.log('Updated todo list:', todos);
-  }, [todos]); // This will run whenever `todo` changes
-
-  const handleAddTodo = () => {
-    if (inputValue.trim()) { // Check if input is not empty
-      setInputValue(''); // Clear input field
-      // console.log('inputValue:', inputValue);
-      setTodo([...todos, inputValue]); // spred operator to add input value to the end of the todo list
+  // eiliskumas 4 - sukuriam funkcija, kuri tikrina ar paspaustas enter ir input nera tuscias
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      if (inputValue.trim()) { // Check if input is not empty
+        // eiliskumas 5 - i paduota funkcija (handleAddTodo) paduodam inputValue verte
+        onAddTodo(inputValue); // Call the function passed as prop
+        setInputValue(''); // Clear input field
+      }
     }
-  }
+  } 
 
   return (
     <div className="AddTodo">
@@ -26,10 +23,8 @@ function AddTodo() {
         placeholder="Add Todo" 
         value={inputValue} // Bind input value to state
         onChange={(e) => setInputValue(e.target.value)} // Update state on input change
+        onKeyDown={handleKeyPress} // instead of add button, press enter to add todo
       />
-      <button type="button" onClick={() => {
-        handleAddTodo();
-      }}>Add</button> {/* Call function on click and log todo list */}
     </div>
   );
 }
