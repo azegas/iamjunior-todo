@@ -35,13 +35,17 @@ function App() {
     setTodos([...todos, newTodo]); // Add new todo to the list
   };
 
+  const handleDeleteTodo = (todo) => {
+    setTodos(todos.filter(t => t !== todo)); // Remove the todo from the list
+  };
+
   // eiliskumas 1 - renderinam visus 
   return (
     <div className="container">
       <Header todos={todos}/>
       {/* eiliskumas 2 - paduodam reikalingas funkcijas kitiem komponentams */}
       <AddTodo onAddTodo={handleAddTodo} /> {/* Pass the function as a prop */}
-      <TodoList todos={todos} /> {/* Pass the state as a prop */}
+      <TodoList todos={todos} handleDeleteTodo={handleDeleteTodo} /> {/* Pass the state as a prop */}
     </div>
   )
 }
