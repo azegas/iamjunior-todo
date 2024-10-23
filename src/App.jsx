@@ -2,8 +2,8 @@ import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
 import { useState, useEffect } from 'react';
 
-function Header() {
-  return <h1 className="Header">Todo</h1>
+function Header({ todos }) {
+  return <h1 className="Header">Todo ({todos.length})</h1>
 }
 
 function App() {
@@ -17,13 +17,18 @@ function App() {
    */
 
   // State for todo list
-  const [todos, setTodos] = useState([]); // Initialize state with an empty array
+  const [todos, setTodos] = useState(() => {
+    // Retrieve todos from local storage if available
+    const savedTodos = localStorage.getItem('todos');
+    // If savedTodos exists, parse it and return the parsed array
+    // If not, return an empty array
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
 
-  // // after updating the todo list, I don't see the newest todo item in the list
-  // // useEffect hook helps with that - listens for changes to the todo state.
-  // useEffect(() => {
-  //   console.log('Updated todo list:', todos);
-  // }, [todos]); // This will run whenever `todo` changes
+  // useEffect to save todos to local storage whenever they change
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos)); // Save todos to local storage
+  }, [todos]); // This will run whenever `todos` changes
 
   // eiliskumas 6 - pasiimam paduota verte (inputValue) ir pridedam i todo lista
   const handleAddTodo = (newTodo) => {
@@ -33,7 +38,7 @@ function App() {
   // eiliskumas 1 - renderinam visus 
   return (
     <div className="container">
-      <Header />
+      <Header todos={todos}/>
       {/* eiliskumas 2 - paduodam reikalingas funkcijas kitiem komponentams */}
       <AddTodo onAddTodo={handleAddTodo} /> {/* Pass the function as a prop */}
       <TodoList todos={todos} /> {/* Pass the state as a prop */}
