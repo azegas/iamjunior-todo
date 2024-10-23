@@ -1,4 +1,3 @@
-import { FaTrashAlt } from "react-icons/fa";
 import './TodoItem.css';
 
 

@@ -1,9 +1,10 @@
 import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
+import TodoStatistics from './components/TodoStatistics';
 import { useState, useEffect } from 'react';
 
-function Header({ todos }) {
-  return <h1 className="Header">Todo ({todos.length})</h1>
+function Header() {
+  return <h1 className="Header">Todo</h1>
 }
 
 function App() {
@@ -42,10 +43,11 @@ function App() {
   // eiliskumas 1 - renderinam visus 
   return (
     <div className="container">
-      <Header todos={todos}/>
-      {/* eiliskumas 2 - paduodam reikalingas funkcijas kitiem komponentams */}
-      <AddTodo onAddTodo={handleAddTodo} /> {/* Pass the function as a prop */}
-      <TodoList todos={todos} handleDeleteTodo={handleDeleteTodo} /> {/* Pass the state as a prop */}
+      <Header />
+      {/* eiliskumas 2 - paduodam reikalingus dalykus as props (values, funkcijas) kitiem komponentams */}
+      <AddTodo onAddTodo={handleAddTodo} />
+      <TodoList todos={todos} handleDeleteTodo={handleDeleteTodo} /> 
+      <TodoStatistics todos={todos} />
     </div>
   )
 }
