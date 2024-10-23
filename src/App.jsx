@@ -1,8 +1,15 @@
-function App() {
+import AddTodo from './components/AddTodo'
+import TodoList from './components/TodoList'
+function Header() {
+  return <h1 className="Header">Todo</h1>
+}
 
+function App() {
   return (
-    <div>
-      <h1>Hello World</h1>
+    <div className="container">
+      <Header />
+      <AddTodo />
+      <TodoList />
     </div>
   )
 }

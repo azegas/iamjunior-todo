@@ -1,0 +1,16 @@
+.AddTodo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.AddTodo button {
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.AddTodo input {
+  padding: 10px;
+}

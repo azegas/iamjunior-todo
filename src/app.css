@@ -1,0 +1,14 @@
+:root {
+  --primary-color: rgb(92, 92, 215);
+}
+
+.Header {
+  background-color: var(--primary-color);   
+  color: white;
+  padding: 20px;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
