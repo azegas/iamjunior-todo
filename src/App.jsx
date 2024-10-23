@@ -25,10 +25,10 @@ function App() {
     return savedTodos ? JSON.parse(savedTodos) : [];
   });
 
-  // useEffect to save todos to local storage whenever they change
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos)); // Save todos to local storage
-  }, [todos]); // This will run whenever `todos` changes
+  // // useEffect to save todos to local storage whenever they change
+  // useEffect(() => {
+  //   localStorage.setItem('todos', JSON.stringify(todos)); // Save todos to local storage
+  // }, [todos]); // This will run whenever `todos` changes
 
   // eiliskumas 6 - pasiimam paduota verte (inputValue) ir pridedam i todo lista
   const handleAddTodo = (newTodo) => {
