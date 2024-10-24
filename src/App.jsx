@@ -17,19 +17,21 @@ function App() {
    * the todo list, and we can pass it down as props to both AddTodo and TodoList. 
    */
 
-  // State for todo list
+  // State for todo list (must be in the parent app component to be shared 
+  // between other child components)
   const [todos, setTodos] = useState(() => {
     // Retrieve todos from local storage if available
     const savedTodos = localStorage.getItem('todos');
     // If savedTodos exists, parse it and return the parsed array
     // If not, return an empty array
     return savedTodos ? JSON.parse(savedTodos) : [];
+    return [];
   });
 
-  // // useEffect to save todos to local storage whenever they change
-  // useEffect(() => {
-  //   localStorage.setItem('todos', JSON.stringify(todos)); // Save todos to local storage
-  // }, [todos]); // This will run whenever `todos` changes
+  // useEffect to save todos to local storage whenever they change
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos)); // Save todos to local storage
+  }, [todos]); // This will run whenever `todos` changes
 
   // eiliskumas 6 - pasiimam paduota verte (inputValue) ir pridedam i todo lista
   const handleAddTodo = (newTodo) => {
@@ -46,7 +48,7 @@ function App() {
       <Header />
       {/* eiliskumas 2 - paduodam reikalingus dalykus as props (values, funkcijas) kitiem komponentams */}
       <AddTodo onAddTodo={handleAddTodo} />
-      <TodoList todos={todos} handleDeleteTodo={handleDeleteTodo} /> 
+      <TodoList todos={todos} handleDeleteTodo={handleDeleteTodo} title="All todos!" /> 
       <TodoStatistics todos={todos} />
     </div>
   )
